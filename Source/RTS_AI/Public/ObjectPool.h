@@ -13,7 +13,7 @@ USTRUCT(BlueprintType)
 struct FSingleObjectPool
 {
 	GENERATED_BODY()
-
+	
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly)
 	TArray<TObjectPtr<UPooledObject>> _PooledObjects;
 };

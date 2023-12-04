@@ -59,11 +59,12 @@ AActor* AObjectPool::GetPooledActor(FString name)
 
 	
 	FActorSpawnParameters spawnParams;
-	spawnParams.Name = FName(_PooledObjectData[currentPool]._ActorName);
+	spawnParams.Name = FName(FString::Printf(TEXT("%s"), *_PooledObjectData[currentPool]._ActorName));
 	spawnParams.NameMode = FActorSpawnParameters::ESpawnActorNameMode::Requested;
 	spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 	AActor* spawnedActor = GetWorld()->SpawnActor(_PooledObjectData[currentPool]._ActorTemplate,
 				&FVector::ZeroVector, &FRotator::ZeroRotator, spawnParams);
+	spawnedActor->SetActorLabel(spawnedActor->GetName());
 	UPooledObject* poolComp = NewObject<UPooledObject>(spawnedActor);
 	poolComp->RegisterComponent();
 	spawnedActor->AddInstanceComponent(poolComp);
@@ -100,7 +101,7 @@ void AObjectPool::BeginPlay()
 	for(int poolIndex = 0; poolIndex < _PooledObjectData.Num(); poolIndex++)
 	{
 		FSingleObjectPool currentPool;
-		spawnParams.Name = FName(_PooledObjectData[poolIndex]._ActorName);
+		spawnParams.Name = FName(FString::Printf(TEXT("%s"), *_PooledObjectData[poolIndex]._ActorName));
 		spawnParams.NameMode = FActorSpawnParameters::ESpawnActorNameMode::Requested;
 		spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 		for(int objectIndex = 0; objectIndex < _PooledObjectData[poolIndex]._PoolSize; objectIndex++)
@@ -108,6 +109,7 @@ void AObjectPool::BeginPlay()
 			
 			AActor* spawnedActor = GetWorld()->SpawnActor(_PooledObjectData[poolIndex]._ActorTemplate,
 				&FVector::ZeroVector, &FRotator::ZeroRotator, spawnParams);
+			spawnedActor->SetActorLabel(spawnedActor->GetName());
 			UPooledObject* poolComp = NewObject<UPooledObject>(spawnedActor);
 			poolComp->RegisterComponent();
 			spawnedActor->AddInstanceComponent(poolComp);
@@ -125,11 +127,12 @@ void AObjectPool::BeginPlay()
 void AObjectPool::RegenItem(int poolIndex, int positionIndex)
 {
 	FActorSpawnParameters spawnParams;
-	spawnParams.Name = FName(_PooledObjectData[poolIndex]._ActorName);
+	spawnParams.Name = FName(FString::Printf(TEXT("%s"), *_PooledObjectData[poolIndex]._ActorName));
 	spawnParams.NameMode = FActorSpawnParameters::ESpawnActorNameMode::Requested;
 	spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 	AActor* spawnedActor = GetWorld()->SpawnActor(_PooledObjectData[poolIndex]._ActorTemplate,
 				&FVector::ZeroVector, &FRotator::ZeroRotator, spawnParams);
+	spawnedActor->SetActorLabel(spawnedActor->GetName());
 	UPooledObject* poolComp = NewObject<UPooledObject>(spawnedActor);
 	poolComp->RegisterComponent();
 	spawnedActor->AddInstanceComponent(poolComp);
