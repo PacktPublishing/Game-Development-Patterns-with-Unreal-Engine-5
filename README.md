@@ -33,7 +33,7 @@ All of the files is organized into folders. For example, Chapter2
 
 Design patterns serve as a toolkit of techniques and practices that enable you to write code that’s not only faster, but also more manageable. With this book, you’ll explore a range of design patterns and learn how to apply them to projects developed in Unreal Engine 5.
 
-With the following software and hardware list you can run all code files present in the book (Chapter 2-12).
+With the following software and hardware list you can run all code files present in the book (Chapter 2-10).
 
 ### Software and Hardware List
 | Software required                    | OS required                         |
